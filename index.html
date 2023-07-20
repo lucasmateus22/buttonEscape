@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .box{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: darkgray;
+            height: 200px;
+            width: 300px;
+        }
+        button{
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="box">
+        <p>Paga pizza?</p>
+        <div class="buttons-container">
+            <button id="yes" onclick="spamHEHE()">Sim</button>
+            <button id="no" onclick="spamHEHE()">Não</button>
+        </div>
+    </div>
+    <script>
+        let button = document.getElementById('no');
+        let height = window.innerHeight - 100;
+        let width = window.innerWidth - 100;
+
+        button.addEventListener('mouseover', function(){
+            button.style.position = "absolute";
+            button.style.top = Math.random() * height + "px";
+            button.style.left = Math.random() * width + "px";
+        })
+    </script>
+    <script>
+        function spamHEHE(){
+        let url = 'https://youtu.be/tgIRmwMvlf4'
+    confirm("clique em ok")
+    for(let i = 0; i < 10; i++){
+        function abrirGuia(url) {
+  window.open(url, '_blank');
+  console.log(i)
+}
+
+abrirGuia('https://youtu.be/tgIRmwMvlf4');
+        }
+        }
+    </script>
+</body>
+</html>
