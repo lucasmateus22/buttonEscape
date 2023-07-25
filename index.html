@@ -10,28 +10,59 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: 98vh;
+            outline: none;
+            background: rgb(228,0,0);
+background: linear-gradient(90deg, rgba(228,0,0,1) 0%, rgba(180,17,108,1) 35%, rgba(255,0,0,1) 100%);
         }
-        .box{
+        #box{
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: darkgray;
-            height: 200px;
+            font-weight: bold;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            border-radius: 20px;
+            background-color: rgb(206, 130, 130);
+            height: 300px;
             width: 300px;
         }
         button{
+            transition: .9s;
+            border: none;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: black;
+            color: #fff;
+        }
+        button:hover{
+            cursor: pointer;
+            transition: .2s;
+            background-color: #fff;
+            color: red;
+            animation-name:hoverme;
+            animation-duration: 1s;
+        }
+        video{
+            display: none;
+            height: 80vh;
+            width: auto;
+            background-color: rgb(255, 255, 255);
         }
     </style>
     
 </head>
 <body>
-    <div class="box">
+    <video id="vid" width="320" height="240" controls loop>
+        <source src="./WhatsApp Video 2023-07-25 at 10.23.07.mp4" type="video/mp4">
+    </video>
+    <div id="box">
         <p>Paga pizza?</p>
         <div class="buttons-container">
-            <button id="yes" onclick="spamHEHE()">Sim</button>
-            <button id="no" onclick="spamHEHE()">Não</button>
+            <button id="yes" onclick="congrulations()">Sim</button>
+            <button id="no" href="./indexVid.html">Não</button>
         </div>
     </div>
     <script>
@@ -46,18 +77,16 @@
         })
     </script>
     <script>
-        function spamHEHE(){
-        let url = 'https://youtu.be/tgIRmwMvlf4'
-    confirm("clique em ok")
-    for(let i = 0; i < 10; i++){
-        function abrirGuia(url) {
-  window.open(url, '_blank');
-  console.log(i)
-}
+        function congrulations(){
+            let videoTag = document.getElementById('vid').style.display;
+            if(videoTag == "block"){
+        document.getElementById('vid').style.display = 'none';
+        }else{
+        document.getElementById('vid').style.display = 'block';
 
-abrirGuia('https://youtu.be/tgIRmwMvlf4');
-        }
-        }
+    }
+};
+
     </script>
 </body>
 </html>
