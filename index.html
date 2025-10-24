@@ -1,70 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teste</title>
+    <title>PIZZA TIME!</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'pizza-red': '#E40000',
+              'pizza-dark': '#8B0000',
+              'pizza-crust': '#FFCC00',
+            },
+            keyframes: {
+                // Keyframe para o efeito de "fuga" (se fosse usado com :hover no CSS)
+                shake: {
+                    '0%, 100%': { transform: 'translateX(0)' },
+                    '20%, 60%': { transform: 'translateX(-5px)' },
+                    '40%, 80%': { transform: 'translateX(5px)' },
+                }
+            },
+            animation: {
+                shake: 'shake 0.5s ease-in-out',
+            }
+          }
+        }
+      }
+    </script>
+
     <style>
-        body{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 98vh;
-            outline: none;
-            background: rgb(228,0,0);
-background: linear-gradient(90deg, rgba(228,0,0,1) 0%, rgba(180,17,108,1) 35%, rgba(255,0,0,1) 100%);
+        /* Define a posição inicial relativa para que o JS possa mudá-la para 'absolute' */
+        #no {
+            position: relative;
+            transition: all 0.2s ease-out; /* Transição curta para o movimento JS */
         }
-        #box{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 20px;
-            font-family: Arial, Helvetica, sans-serif;
-            border-radius: 20px;
-            background-color: rgb(206, 130, 130);
-            height: 300px;
-            width: 300px;
-        }
-        button{
-            transition: .9s;
-            border: none;
-            font-weight: bold;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: black;
-            color: #fff;
-        }
-        button:hover{
-            cursor: pointer;
-            transition: .2s;
-            background-color: #fff;
-            color: red;
-            animation-name:hoverme;
-            animation-duration: 1s;
-        }
-        video{
+        #vid {
             display: none;
-            height: 80vh;
-            width: auto;
-            background-color: rgb(255, 255, 255);
         }
     </style>
-    
 </head>
-<body>
-    <video id="vid" width="320" height="240" controls loop>
+<body class="flex flex-col items-center justify-center min-h-screen p-4 
+             bg-gradient-to-br from-pizza-red to-pizza-dark font-sans overflow-hidden">
+    
+    <video id="vid" width="620" height="auto" controls loop 
+           class="max-w-full max-h-[80vh] rounded-xl shadow-2xl bg-white/90">
         <source src="./WhatsApp Video 2023-07-25 at 10.23.07.mp4" type="video/mp4">
     </video>
-    <div id="box">
-        <p>Paga pizza?</p>
-        <div class="buttons-container">
-            <button id="yes" onclick="congrulations()">Sim</button>
-            <button id="no" href="./indexVid.html">Não</button>
+    
+    <div id="box" class="flex flex-col items-center justify-around 
+                        /* Layout e Tamanho */
+                        w-11/12 max-w-sm h-80 p-6 
+                        /* Aparência */
+                        bg-white rounded-xl shadow-2xl border-4 border-pizza-crust 
+                        text-gray-800 text-center transition-all duration-300">
+        
+        <p class="text-3xl font-extrabold text-pizza-dark mb-6">
+            Paga a pizza hoje?
+        </p>
+        
+        <div class="buttons-container flex space-x-6">
+            
+            <button id="yes" onclick="congrulations()"
+                    class="py-3 px-8 rounded-full font-bold uppercase tracking-wider 
+                           bg-green-500 text-white shadow-md transition-all duration-300 
+                           hover:bg-green-600 hover:scale-105 hover:shadow-lg focus:outline-none">
+                Sim!
+            </button>
+            
+            <a href="./indexVid.html" class="inline-block focus:outline-none">
+                <button id="no" 
+                        class="py-3 px-8 rounded-full font-bold uppercase tracking-wider 
+                               bg-pizza-red text-white shadow-md transition-all duration-300 
+                               hover:bg-pizza-dark hover:scale-105 focus:outline-none">
+                    Não
+                </button>
+            </a>
         </div>
     </div>
+    
     <script>
         let button = document.getElementById('no');
         let height = window.innerHeight - 100;
@@ -72,21 +89,27 @@ background: linear-gradient(90deg, rgba(228,0,0,1) 0%, rgba(180,17,108,1) 35%, r
 
         button.addEventListener('mouseover', function(){
             button.style.position = "absolute";
-            button.style.top = Math.random() * height + "px";
-            button.style.left = Math.random() * width + "px";
-        })
+            // Adicionado Math.random() * (variável - 50) para evitar que o botão saia da tela
+            button.style.top = Math.random() * (height - 50) + "px"; 
+            button.style.left = Math.random() * (width - 50) + "px";
+        });
     </script>
     <script>
         function congrulations(){
-            let videoTag = document.getElementById('vid').style.display;
-            if(videoTag == "block"){
-        document.getElementById('vid').style.display = 'none';
-        }else{
-        document.getElementById('vid').style.display = 'block';
-
-    }
-};
-
+            let videoTag = document.getElementById('vid');
+            let boxTag = document.getElementById('box');
+            
+            // Alterna a visibilidade e controle de reprodução
+            if(videoTag.style.display === "block"){
+                videoTag.style.display = 'none';
+                boxTag.style.display = 'flex'; // Mostra a caixa de volta
+                videoTag.pause();
+            }else{
+                videoTag.style.display = 'block';
+                boxTag.style.display = 'none'; // Esconde a caixa
+                videoTag.play(); // Começa a tocar o vídeo
+            }
+        };
     </script>
 </body>
 </html>
