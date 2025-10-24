@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIZZA TIME! - Vídeo</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "pizza-red": "#E40000",
+              "pizza-dark": "#8B0000",
+              "pizza-crust": "#FFCC00",
+            },
+            // Não é necessário o 'shake' para esta página, mas é bom replicar
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="flex items-center justify-center h-screen p-4 bg-gradient-to-br from-pizza-red to-pizza-dark font-sans overflow-hidden"
+  >
+    <video
+      controls
+      autoplay
+      loop
+      class="max-w-full max-h-full w-auto h-auto rounded-xl shadow-2xl bg-black/50"
+    >
+      <source
+        src="../public/WhatsApp Video 2023-07-25 at 11.02.10.mp4"
+        type="video/mp4"
+      />
+      Seu navegador não suporta a tag de vídeo.
+    </video>
+  </body>
+</html>
